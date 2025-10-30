@@ -1,0 +1,46 @@
+---
+- name: Installing Tomcat10 on all server machines
+  hosts: all
+  become: yes
+  tasks:
+    - name: Install Tomcat10
+      apt:
+        name: tomcat10
+        state: present
+        update_cache: yes
+
+    - name: Install Tomcat10 admin package
+      apt:
+        name: tomcat10-admin
+        state: present
+
+    - name: Copy customized tomcat-users.xml to all servers
+      copy:
+        src: tomcat-users.xml
+        dest: /etc/tomcat10/
+
+    - name: Replace port 8080 with 9090 in server.xml
+      replace:
+        regexp: '8080'
+        replace: '9090'
+        path: /etc/tomcat10/server.xml
+
+    - name: Restart Tomcat10 service
+      service:
+        name: tomcat10
+        state: restarted
+    - name: Pause for 1 minute
+      pause:
+        minutes: 1
+
+    - name: Check Tomcat response on server1
+      uri:
+        url: "http://172.31.14.122:9090"
+        status_code: 200
+
+    - name: Check Tomcat response on server2
+      uri:
+        url: "http://172.31.5.169:9090"
+        status_code: 200
+...
+

@@ -1,0 +1,12 @@
+---
+ - name: Copy passwd file to all servers
+   hosts: all
+   tasks: 
+    - name: Copy passwd file
+      copy:
+        src: /etc/passwd
+        dest: /tmp
+        owner: Ravi
+        group: root 
+        mode: 750
+...

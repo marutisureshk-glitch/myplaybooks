@@ -1,0 +1,9 @@
+---
+ - name: Clone repository from github
+   hosts: all
+   tasks:
+    - name: Download repository
+      git:
+        repo: https://github.com/intelliqittrainings/maven.git
+        dest: tmp/mygit
+...
