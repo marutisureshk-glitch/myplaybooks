@@ -1,0 +1,7 @@
+---
+- name: Copying index2 file to all the servers
+  copy:
+    src: index2.html
+    dest: /var/www/html/
+  notify: Restart apache
+...

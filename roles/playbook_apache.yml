@@ -1,0 +1,6 @@
+---
+- name: Installation of apache, copying files, testing the server is working or not
+  hosts: all
+  roles:
+    - apache
+...

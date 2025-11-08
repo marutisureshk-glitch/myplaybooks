@@ -1,0 +1,6 @@
+---
+- name: Playbook of installation tomcat10, configure,restart on all the servers
+  hosts: all
+  roles:
+    - tomcat10
+...
